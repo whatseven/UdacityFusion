@@ -167,7 +167,7 @@ std::pair<typename pcl::PointCloud<PointT>::Ptr,
         float sqrta2b2c2 = sqrt(A * A + B * B + C * C)+0.0001f;
 
         int itemIndex = 0;
-        for (auto pointItem : cloud->points) {
+        for (typename PointT& pointItem : cloud->points) {
             if (abs(A * pointItem.x + B * pointItem.y + C * pointItem.z + D) /
                 sqrta2b2c2 <
                 distanceThreshold) {
