@@ -76,7 +76,7 @@ void cityBlock(pcl::visualization::PCLVisualizer::Ptr &viewer,
 
     std::pair<pcl::PointCloud<pcl::PointXYZI>::Ptr,
         pcl::PointCloud<pcl::PointXYZI>::Ptr>
-        segmentResult = solver.SegmentPlaneMine(afterFiltered, 500, 0.2f);
+        segmentResult = solver.SegmentPlaneMine(afterFiltered, 100, 0.2f);
 
     renderPointCloud(viewer, segmentResult.first, "1", Color(0.f, 1.f, 0.f));
     renderPointCloud(viewer, segmentResult.second, "2", Color(1.f, 0.f, 0.f));

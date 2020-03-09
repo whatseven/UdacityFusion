@@ -147,18 +147,6 @@ std::pair<typename pcl::PointCloud<PointT>::Ptr,
         while (pointIndex2 == pointIndex3)
             pointIndex3 = ud(mt);
 
-        Eigen::Vector3f v1 = Eigen::Vector3f(cloud->points[pointIndex2].x,
-            cloud->points[pointIndex2].y,
-            cloud->points[pointIndex2].z) - Eigen::Vector3f(cloud->points[pointIndex1].x,
-                cloud->points[pointIndex1].y,
-                cloud->points[pointIndex1].z);
-        Eigen::Vector3f v2 =
-            Eigen::Vector3f(cloud->points[pointIndex3].x,
-                cloud->points[pointIndex3].y,
-                cloud->points[pointIndex3].z) - Eigen::Vector3f(cloud->points[pointIndex1].x,
-                    cloud->points[pointIndex1].y,
-                    cloud->points[pointIndex1].z);
-
         float x1 = cloud->points[pointIndex2].x - cloud->points[pointIndex1].x;
         float y1 = cloud->points[pointIndex2].y - cloud->points[pointIndex1].y;
         float z1 = cloud->points[pointIndex2].z - cloud->points[pointIndex1].z;
@@ -176,7 +164,7 @@ std::pair<typename pcl::PointCloud<PointT>::Ptr,
         float D =
             -(A * cloud->points[pointIndex1].x + B * cloud->points[pointIndex1].y +
                 C * cloud->points[pointIndex1].z);
-        float sqrta2b2c2 = sqrtf(A * A + B * B + C * C)+0.0001f;
+        float sqrta2b2c2 = sqrt(A * A + B * B + C * C)+0.0001f;
 
         int itemIndex = 0;
         for (auto pointItem : cloud->points) {
@@ -191,6 +179,10 @@ std::pair<typename pcl::PointCloud<PointT>::Ptr,
             inliersResult = inliersIterations;
         }
     }
+
+    std::cout << "Inliers: " << inliersResult.size() << std::endl;
+    std::cout << "Outliers: " << cloud->points.size()-inliersResult.size() << std::endl;
+
     typename pcl::PointCloud<PointT>::Ptr cloudInliers(new pcl::PointCloud<PointT>());
     typename pcl::PointCloud<PointT>::Ptr cloudOutliers(new pcl::PointCloud<PointT>());
 
