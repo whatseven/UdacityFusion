@@ -79,7 +79,7 @@ void cityBlock(pcl::visualization::PCLVisualizer::Ptr &viewer,
         segmentResult = solver.SegmentPlaneMine(afterFiltered, 100, 0.2f);
 
     renderPointCloud(viewer, segmentResult.first, "1", Color(0.f, 1.f, 0.f));
-    renderPointCloud(viewer, segmentResult.second, "2", Color(1.f, 0.f, 0.f));
+    //renderPointCloud(viewer, segmentResult.second, "2", Color(1.f, 0.f, 0.f));
 
     std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr> cloudClusters =
         solver.ClusteringMine(segmentResult.second, 2, 10, 2000);
@@ -90,11 +90,11 @@ void cityBlock(pcl::visualization::PCLVisualizer::Ptr &viewer,
     for (pcl::PointCloud<pcl::PointXYZI>::Ptr cluster : cloudClusters) {
         //std::cout << "cluster size ";
         //solver.numPoints(cluster);
-        //renderPointCloud(viewer, cluster,
-        //    "obstCloud" + std::to_string(clusterId),
-        //    colors[clusterId % 3]);
+        renderPointCloud(viewer, cluster,
+            "obstCloud" + std::to_string(clusterId),
+            colors[clusterId % 3]);
         Box aabbBox = solver.BoundingBox(cluster);
-        //renderBox(viewer, aabbBox, clusterId, Color(1.f, 0.f, 0.f), 0.5);
+        renderBox(viewer, aabbBox, clusterId, Color(1.f, 0.f, 0.f), 0.5);
         ++clusterId;
     }
 
