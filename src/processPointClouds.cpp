@@ -168,7 +168,7 @@ std::pair<typename pcl::PointCloud<PointT>::Ptr,
 
         for (int itemIndex = 0; itemIndex < cloud->points.size();itemIndex++) {
             PointT& pointItem = cloud->points[itemIndex];
-            if (abs(A * pointItem.x + B * pointItem.y + C * pointItem.z + D) <
+            if (fabs(A * pointItem.x + B * pointItem.y + C * pointItem.z + D) <
                 distanceThreshold*sqrta2b2c2) {
                 inliersIterations.insert(itemIndex);
             }
