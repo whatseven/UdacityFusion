@@ -14,8 +14,10 @@ link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
 list(REMOVE_ITEM PCL_LIBRARIES "vtkproj4")
 
+file(GLOB  SRC src/*.cpp src/*.h src/render/*.cpp src/render/*.h src/sensor/*.h)
+#file(GLOB SRC src/quiz/cluster/cluster.cpp src/quiz/cluster/kdtree.h src/render/*.cpp src/render/*.h)
 
-add_executable (environment src/environment.cpp src/render/render.cpp src/processPointClouds.cpp)
+add_executable (environment ${SRC})
 target_link_libraries (environment ${PCL_LIBRARIES})
 
 
